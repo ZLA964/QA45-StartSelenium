@@ -19,29 +19,27 @@ public class SelectorsCssTest {
         for (int i = 1; i <= 6; i++) {
             String locator = ".header :nth-of-type(" + i + ")";
             WebElement element = driver.findElement(By.cssSelector(locator));
-            System.out.print(element.getTagName() + "  ");
-            System.out.println(element.getText());
+            printTagAndText(element);
         }
         System.out.println("=======================================");
 
         System.out.println("=============== v.2 ===================");
         headerElements = driver.findElements(By.cssSelector(".header *"));
         for (WebElement element : headerElements) {
-            System.out.print(element.getTagName() + "  ");
-            System.out.println(element.getText());
+            printTagAndText(element);
         }
         System.out.println("=======================================");
 
         System.out.println("=============== v.3 ===================");
         WebElement element = driver.findElement(By.cssSelector(".header:nth-child(1)"));
-        System.out.print(element.getTagName() + ": ");
-        System.out.print(element.getText());
-        System.out.println("\n  =======================================");
+        printTagAndText(element);
+        System.out.println("=======================================");
 
         driver.quit();
     }
 
-    private void printTagNameAndText(WebElement element) {
-
+    private void printTagAndText(WebElement element) {
+        System.out.print(element.getTagName() + "  ");
+        System.out.println(element.getText());
     }
 }
