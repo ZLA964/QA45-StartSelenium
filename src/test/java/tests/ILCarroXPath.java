@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,7 +13,15 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class ILCarroXPath {
-    WebDriver driver = new ChromeDriver();
+    private WebDriver driver;
+
+
+ //   WebDriver driver = new ChromeDriver();
+
+
+
+
+
     String[] stringsForRegistration = new String[4];
 //    String name = "Firstname";
 //    String lastName = "Lastname";
@@ -21,10 +30,18 @@ public class ILCarroXPath {
 
     @BeforeMethod
     public void setUp() {
+        driver = new ChromeDriver();  // Инициализация драйвера перед каждым тестом
         stringsForRegistration[0]="Namefirst";
         stringsForRegistration[1]="Lastname";
         stringsForRegistration[2]="email1@mail.com.il";
         stringsForRegistration[3]="Ab123455@!";
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();  // Закрытие браузера после каждого теста
+        }
     }
 
     @Test
@@ -74,7 +91,7 @@ public class ILCarroXPath {
                 count++;
             }
             Thread.sleep(5000);
-        driver.quit();
+  //      driver.quit();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
