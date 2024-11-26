@@ -14,13 +14,7 @@ import java.util.List;
 
 public class ILCarroXPath {
     private WebDriver driver;
-
-
  //   WebDriver driver = new ChromeDriver();
-
-
-
-
 
     String[] stringsForRegistration = new String[4];
 //    String name = "Firstname";
@@ -39,6 +33,11 @@ public class ILCarroXPath {
 
     @AfterMethod
     public void tearDown() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if (driver != null) {
             driver.quit();  // Закрытие браузера после каждого теста
         }
@@ -95,5 +94,31 @@ public class ILCarroXPath {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    public void typeRgForm(){
+        driver.get("https://ilcarro.web.app/registration?url=%2Fsearch");
+        driver.manage().window().maximize();
+        WebElement inputName = driver.findElement((By.xpath("//input[@id='name']")));
+        inputName.sendKeys(("Leva"));
+        WebElement inputLastName = driver.findElement((
+                By.xpath("//input[@formcontrolname='lastName']")));
+        inputLastName.sendKeys(("Lastleva"));
+        WebElement inputEmail = driver.findElement((
+                By.xpath("//input[@type='email']")));
+        inputEmail.sendKeys(("leva@mail.com"));
+        WebElement inputPassword = driver.findElement(
+                By.xpath("//input[@type='password']"));
+        inputPassword.sendKeys(("AaBb1234!@"));
+        WebElement checkBox = driver.findElement(
+                By.xpath("//label[@for='terms-of-use']"));
+        checkBox.click();
+//        WebElement btnYalla = driver.findElement(By.xpath("//button[text()='Y’alla!']"));
+//        btnYalla.click();
+        WebElement btnYalla = driver.findElement(By.xpath("//button[@type='submit']"));
+        btnYalla.click();
+
+
     }
 }
